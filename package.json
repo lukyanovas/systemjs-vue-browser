@@ -1,0 +1,20 @@
+{
+  "name": "systemjs-vue-browser",
+  "version": "1.0.0",
+  "description": "SystemJS plugin to load .vue single file components",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukyanovas/systemjs-vue-browser.git"
+  },
+  "keywords": [
+    "vue",
+    "systemjs"
+  ],
+  "author": "Andrey Lukyanov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukyanovas/systemjs-vue-browser/issues"
+  },
+  "homepage": "https://github.com/lukyanovas/systemjs-vue-browser#readme"
+}
