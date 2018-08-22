@@ -1,7 +1,6 @@
-var translateSFC;
-(function(translateSFC) {
+(function(translate) {
   
-  translateSFC = function(source) {
+  window.translateSFC = function(source) {
     const script = extract(source, "script");
     const match = script.match(
       /(name(.*):|data(.*){|methods(.*):|computed(.*):|components(.*):)/im
@@ -62,7 +61,7 @@ var translateSFC;
       head.appendChild(style);
     }
   }
-})(translateSFC);
+})();
 
 if(exports) {
   exports.translate = (() => {
