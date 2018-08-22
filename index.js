@@ -64,8 +64,10 @@ var translateSFC;
   }
 })(translateSFC);
 
-(exports || {}).translate = (() => {
-  return (load) => {
-    return (load.source = translateSFC(load.source));
-  };
-})();
+if(exports) {
+  exports.translate = (() => {
+    return (load) => {
+      return (load.source = translateSFC(load.source));
+    };
+  })();
+}
