@@ -63,7 +63,7 @@
   }
 })();
 
-if(exports) {
+if(typeof exports !== 'undefined') {
   exports.translate = (() => {
     return (load) => {
       return (load.source = translateSFC(load.source));
