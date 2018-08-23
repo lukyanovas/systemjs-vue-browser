@@ -12,7 +12,7 @@ System.config({
   map: {
     vue: "npm:vue@2.5.16/dist/vue.esm.browser.js",
     
-    "vue-loader": "npm:systemjs-vue-browser@1.0.4/index.js",
+    "vue-loader": "npm:systemjs-vue-browser@1.0.5/index.js",
 
     "plugin-babel": "npm:systemjs-plugin-babel@0/plugin-babel.js",
     "systemjs-babel-build":
