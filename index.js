@@ -1,9 +1,9 @@
-(function(translate) {
+(function() {
   
   window.translateSFC = function(source) {
     const script = extract(source, "script");
     const match = script.match(
-      /(name(.*):|data(.*){|methods(.*):|props(.*):|computed(.*):|components(.*):)/im
+      /(name ?:|data ?[:(](.*){|methods ?:|props ?:|computed ?:|components ?:)/im
     );
   
     const template = extract(source, "template");
