@@ -25,4 +25,4 @@ System.config({
 
 ```
 
-Codesandbox [example](https://codesandbox.io/s/l49oz232km) 
+Codesandbox [example](https://codesandbox.io/s/o61y8zx2y) 
