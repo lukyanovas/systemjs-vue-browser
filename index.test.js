@@ -45,11 +45,27 @@ export default {
     expect(translateSFC(componentSource)).toBe(result);
 });
 
+it("process template without styles", () => {
+    const result = `
+export default {
+  template:  \`
+    <div class=\"my-class\">
+        Content and { text }
+    </div>
+\`,data() {
+    return {
+      text: \"my-text\",
+    };
+  }
+};
+`;
+    expect(translateSFC(template)).toBe(result);
+});
+
 it("process styles", () => {
     translateSFC(componentSource)
     expect(document.head.children[0].outerHTML).toEqual('<style type="text/css">.my-class { color: red;}</style>');
 });
-
 
 it("process with standalone styles", () => {
     const componentWithStandaloneStyles = `${template}

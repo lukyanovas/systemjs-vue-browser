@@ -60,7 +60,10 @@
   }
 
   function findSrc(attrs) {
-    return attrs ? attrs.match(/src="(.*)"/im)[1] : "";
+    if (!attrs) return "";
+    var result = attrs.match(/src="(.*)"/i);
+
+    return result ? result[1] : "";
   }
 
 })();
