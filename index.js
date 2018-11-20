@@ -41,22 +41,32 @@
   }
 
   function appendStyle(styleInfo) {
+    if (typeof document === "undefined") return;
+
     var css = styleInfo.content;
     var src = findSrc(styleInfo.attrs);
-    if ((css || src) && typeof document !== "undefined") {
-      var style = document.createElement("style");
-      src && style.setAttribute("src", src);
-      style.type = "text/css";
+
+    if (!css && !src) return;
+
+    var style = document.createElement(src ? "link" : "style");
+
+    style.type = "text/css";
+    
+    if(src) {
+      style.setAttribute("href", src);
+      style.setAttribute("rel", "stylesheet");
+    } else {
       if (style.styleSheet) {
         style.styleSheet.cssText = css;
       } else {
         style.appendChild(document.createTextNode(css));
       }
-
-      var head = document.head || document.querySelector("head") || document.getElementsByTagName("head")[0];
-
-      head.appendChild(style);
     }
+
+    var head = document.head || document.querySelector("head") || document.getElementsByTagName("head")[0];
+
+    head.appendChild(style);
+    
   }
 
   function findSrc(attrs) {

@@ -72,5 +72,5 @@ it("process with standalone styles", () => {
     <style scoped anothershit src="./styles.css"></style>`;
 
     translateSFC(componentWithStandaloneStyles)
-    expect(document.head.children[0].outerHTML).toEqual('<style src=\"./styles.css\" type=\"text/css\"></style>');
+    expect(document.head.children[0].outerHTML).toEqual('<link type="text/css" href="./styles.css" rel="stylesheet">');
 });
