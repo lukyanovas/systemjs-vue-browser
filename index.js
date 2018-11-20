@@ -3,10 +3,10 @@
 (function () {
 
   window.translateSFC = function (source) {
-    var script = extract(source, "script");
+    var script = extract(source, "script").content;
     var match = script.match(/(name ?:|data ?[:(](.*){|methods ?:|props ?:|computed ?:|components ?:)/im);
 
-    var template = extract(source, "template");
+    var template = extract(source, "template").content;
     var result = script.substr(0, match.index) + "template:  `" + template + "`," + script.substr(match.index);
 
     appendStyle(parseStyle(source));
@@ -14,20 +14,15 @@
     return result;
   };
 
-  function parseStyle(text) {
-    var style = extract(text, "style");
-    if (style) {
-      return style.replace(/[\n\r]+/g, "").replace(/ {2,20}/g, " ");
-    }
-  }
-
   function extract(text, tag) {
-    var start = text.indexOf("<" + tag);
-    var startTagLength = findTagEnd(text, start);
-    var end = text.indexOf("</" + tag + ">");
+    var firstTagSymbols = "<" + tag;
+    var start = text.indexOf(firstTagSymbols);
+    var contentStart = findTagEnd(text, start);
+    var contentEnd = text.indexOf("</" + tag + ">");
 
-    if (start !== -1) {
-      return text.substring(startTagLength, end);
+    return {
+      content: start !== -1 ? text.substring(contentStart, contentEnd) : null,
+      attrs: text.substring(start + firstTagSymbols.length, contentStart - 1)
     }
   }
 
@@ -37,9 +32,20 @@
     return i;
   }
 
-  function appendStyle(css) {
-    if (css && typeof document !== "undefined") {
+  function parseStyle(text) {
+    var styleInfo = extract(text, "style");
+    if (styleInfo.content) {
+      styleInfo.content = styleInfo.content.replace(/[\n\r]+/g, "").replace(/ {2,20}/g, " ");
+    }
+    return styleInfo;
+  }
+
+  function appendStyle(styleInfo) {
+    var css = styleInfo.content;
+    var src = findSrc(styleInfo.attrs);
+    if ((css || src) && typeof document !== "undefined") {
       var style = document.createElement("style");
+      src && style.setAttribute("src", src);
       style.type = "text/css";
       if (style.styleSheet) {
         style.styleSheet.cssText = css;
@@ -52,6 +58,11 @@
       head.appendChild(style);
     }
   }
+
+  function findSrc(attrs) {
+    return attrs ? attrs.match(/src="(.*)"/im)[1] : "";
+  }
+
 })();
 
 if (typeof exports !== 'undefined') {

@@ -1,6 +1,6 @@
 {
   "name": "systemjs-vue-browser",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "SystemJS plugin to load .vue single file components",
   "main": "index.js",
   "repository": {
@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/lukyanovas/systemjs-vue-browser/issues"
   },
-  "homepage": "https://github.com/lukyanovas/systemjs-vue-browser#readme"
+  "scripts": {
+    "test": "jest"
+  },
+  "homepage": "https://github.com/lukyanovas/systemjs-vue-browser#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
